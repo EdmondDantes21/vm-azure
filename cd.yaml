@@ -1,0 +1,9 @@
+apiVersion: core.krateo.io/v1alpha1
+kind: CompositionDefinition
+metadata:
+  name: azure-virtual-machine
+  namespace: krateo-system
+spec:
+  chart:
+    url: oci://ghcr.io/edmonddantes21/vm-azure/azure-virtual-machine
+    version: "1.0.0"
