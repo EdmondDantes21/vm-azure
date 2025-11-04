@@ -1,0 +1,26 @@
+armRegionName: eastus
+resourceGroupName: my-resource-group
+resourceGroupReconcilePolicy: skip
+
+virtualNetwork:
+  name: my-vnet
+  addressPrefix: 10.0.0.0/16
+
+subnet:
+  name: my-subnet
+  addressPrefix: 10.0.0.0/24
+
+networkInterface:
+  name: my-nic
+  ipConfigurationName: ipconfig1
+
+vm:
+  name: my-vm
+  vmSize: Standard_B1s
+  adminUsername: azureuser
+  computerName: myvm
+  secretName: my-vm-secret
+
+secret: 
+  name: my-vm-secret
+  vmPassword: YourSecurePassword123!

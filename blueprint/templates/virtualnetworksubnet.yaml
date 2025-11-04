@@ -1,0 +1,8 @@
+apiVersion: network.azure.com/v1api20201101
+kind: VirtualNetworksSubnet
+metadata:
+  name: {{ .Values.subnet.name }}
+spec:
+  owner:
+    name: {{ .Values.virtualNetwork.name }}
+  addressPrefix: {{ .Values.subnet.addressPrefix }}

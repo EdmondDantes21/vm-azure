@@ -1,0 +1,11 @@
+apiVersion: network.azure.com/v1api20201101
+kind: VirtualNetwork
+metadata:
+  name: {{ .Values.virtualNetwork.name }}
+spec:
+  location: {{ .Values.armRegionName }}
+  owner:
+    name: {{ .Values.resourceGroupName }}
+  addressSpace:
+    addressPrefixes:
+      - {{ .Values.virtualNetwork.addressPrefix }}

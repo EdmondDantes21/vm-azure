@@ -1,0 +1,30 @@
+apiVersion: compute.azure.com/v1api20220301
+kind: VirtualMachine
+metadata:
+  name: {{ .Values.vm.name }}
+  annotations: 
+    krateo-finops-focus-resource: '["{{ .Values.vm.vmSize }}"]'
+spec:
+  hardwareProfile:
+    vmSize: {{ .Values.vm.vmSize }}
+  location: {{ .Values.armRegionName }}
+  networkProfile:
+    networkInterfaces:
+      - reference:
+          group: network.azure.com
+          kind: NetworkInterface
+          name: {{ .Values.networkInterface.name }}
+  osProfile:
+    adminUsername: {{ .Values.vm.adminUsername }}
+    adminPassword:
+      key: password
+      name: {{ .Values.vm.secretName }}
+    computerName: {{ .Values.vm.computerName }}
+  owner:
+    name: {{ .Values.resourceGroupName }}
+  storageProfile:
+    imageReference:
+      publisher: Canonical
+      offer: 0001-com-ubuntu-server-jammy
+      sku: 22_04-lts
+      version: latest
