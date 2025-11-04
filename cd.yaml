@@ -6,4 +6,4 @@ metadata:
 spec:
   chart:
     url: oci://ghcr.io/edmonddantes21/vm-azure/azure-virtual-machine
-    version: "1.0.0"
+    version: "0.1.0"
