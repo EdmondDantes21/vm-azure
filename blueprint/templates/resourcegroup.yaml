@@ -1,9 +1,9 @@
 apiVersion: resources.azure.com/v1api20200601
 kind: ResourceGroup
 metadata:
-  name: {{ .Values.resourceGroupName }}
+  name: {{ .Values.resourceGroup.name }}
   annotations:
-    serviceoperator.azure.com/reconcile-policy: {{ .Values.resourceGroupReconcilePolicy | default "skip" }}
+    serviceoperator.azure.com/reconcile-policy: {{ .Values.resourceGroup.reconcilePolicy | default "skip" }}
 spec:
   location: {{ .Values.armRegionName }}
-  azureName: Autopilot
+  azureName: {{ .Values.resourceGroup.azureName }} 

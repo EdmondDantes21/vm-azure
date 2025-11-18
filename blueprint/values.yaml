@@ -1,6 +1,9 @@
 armRegionName: eastus
-resourceGroupName: my-resource-group
-resourceGroupReconcilePolicy: skip
+
+resourceGroup:
+  name: my-resource-group
+  reconcilePolicy: skip
+  azureName: Autopilot
 
 virtualNetwork:
   name: my-vnet

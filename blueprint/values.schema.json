@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "additionalProperties": true,
+  "additionalProperties": false,
   "properties": {
     "armRegionName": {
       "default": "eastus",
@@ -8,7 +8,7 @@
       "type": "string"
     },
     "networkInterface": {
-      "additionalProperties": true,
+      "additionalProperties": false,
       "properties": {
         "ipConfigurationName": {
           "default": "ipconfig1",
@@ -28,13 +28,56 @@
       "title": "networkInterface",
       "type": "object"
     },
-    "resourceGroupName": {
-      "default": "my-rg",
-      "title": "resourceGroupName",
-      "type": "string"
+    "resourceGroup": {
+      "additionalProperties": false,
+      "properties": {
+        "azureName": {
+          "default": "Autopilot",
+          "title": "azureName",
+          "type": "string"
+        },
+        "name": {
+          "default": "my-resource-group",
+          "title": "name",
+          "type": "string"
+        },
+        "reconcilePolicy": {
+          "default": "skip",
+          "title": "reconcilePolicy",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "reconcilePolicy",
+        "azureName"
+      ],
+      "title": "resourceGroup",
+      "type": "object"
+    },
+    "secret": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "default": "my-vm-secret",
+          "title": "name",
+          "type": "string"
+        },
+        "vmPassword": {
+          "default": "YourSecurePassword123!",
+          "title": "vmPassword",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "vmPassword"
+      ],
+      "title": "secret",
+      "type": "object"
     },
     "subnet": {
-      "additionalProperties": true,
+      "additionalProperties": false,
       "properties": {
         "addressPrefix": {
           "default": "10.0.0.0/24",
@@ -55,7 +98,7 @@
       "type": "object"
     },
     "virtualNetwork": {
-      "additionalProperties": true,
+      "additionalProperties": false,
       "properties": {
         "addressPrefix": {
           "default": "10.0.0.0/16",
@@ -76,7 +119,7 @@
       "type": "object"
     },
     "vm": {
-      "additionalProperties": true,
+      "additionalProperties": false,
       "properties": {
         "adminUsername": {
           "default": "azureuser",
@@ -117,11 +160,12 @@
   },
   "required": [
     "armRegionName",
-    "resourceGroupName",
+    "resourceGroup",
     "virtualNetwork",
     "subnet",
     "networkInterface",
-    "vm"
+    "vm",
+    "secret"
   ],
   "type": "object"
 }
