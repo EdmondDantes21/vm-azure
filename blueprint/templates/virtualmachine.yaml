@@ -21,7 +21,7 @@ spec:
       name: {{ .Values.vm.secretName }}
     computerName: {{ .Values.vm.computerName }}
   owner:
-    name: {{ .Values.resourceGroupName }}
+    name: {{ .Values.resourceGroup.name }}
   storageProfile:
     imageReference:
       publisher: Canonical

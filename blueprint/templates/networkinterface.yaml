@@ -5,7 +5,7 @@ metadata:
 spec:
   location: {{ .Values.armRegionName }}
   owner:
-    name: {{ .Values.resourceGroupName }}
+    name: {{ .Values.resourceGroup.name }}
   ipConfigurations:
     - name: {{ .Values.networkInterface.ipConfigurationName }}
       privateIPAllocationMethod: Dynamic
