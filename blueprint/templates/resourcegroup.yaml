@@ -2,6 +2,7 @@ apiVersion: resources.azure.com/v1api20200601
 kind: ResourceGroup
 metadata:
   name: {{ .Values.resourceGroup.name }}
+  namespace: {{ .Release.Namespace }}
   annotations:
     serviceoperator.azure.com/reconcile-policy: {{ .Values.resourceGroup.reconcilePolicy | default "skip" }}
 spec:

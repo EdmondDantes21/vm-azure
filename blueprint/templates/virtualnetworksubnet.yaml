@@ -1,8 +1,22 @@
+{{- /* Check VNet Existence and Readiness */ -}}
+{{- $vnet := lookup "network.azure.com/v1api20201101" "VirtualNetwork" .Release.Namespace .Values.virtualNetwork.name -}}
+{{- $vnetState := dict "ready" false -}}
+{{- if and $vnet $vnet.status -}}
+  {{- range $vnet.status.conditions -}}
+    {{- if and (eq .type "Ready") (eq .status "True") -}}
+      {{- $_ := set $vnetState "ready" true -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $vnetState.ready }}
 apiVersion: network.azure.com/v1api20201101
 kind: VirtualNetworksSubnet
 metadata:
   name: {{ .Values.subnet.name }}
+  namespace: {{ .Release.Namespace }}
 spec:
   owner:
     name: {{ .Values.virtualNetwork.name }}
   addressPrefix: {{ .Values.subnet.addressPrefix }}
+{{- end }}

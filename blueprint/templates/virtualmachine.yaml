@@ -1,9 +1,20 @@
+{{- /* Check NIC Existence and Readiness */ -}}
+{{- $nic := lookup "network.azure.com/v1api20201101" "NetworkInterface" .Release.Namespace .Values.networkInterface.name -}}
+{{- $nicState := dict "ready" false -}}
+{{- if and $nic $nic.status -}}
+  {{- range $nic.status.conditions -}}
+    {{- if and (eq .type "Ready") (eq .status "True") -}}
+      {{- $_ := set $nicState "ready" true -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $nicState.ready }}
 apiVersion: compute.azure.com/v1api20220301
 kind: VirtualMachine
 metadata:
   name: {{ .Values.vm.name }}
-  annotations: 
-    krateo-finops-focus-resource: '["{{ .Values.vm.vmSize }}"]'
+  namespace: {{ .Release.Namespace }}
 spec:
   hardwareProfile:
     vmSize: {{ .Values.vm.vmSize }}
@@ -28,3 +39,4 @@ spec:
       offer: 0001-com-ubuntu-server-jammy
       sku: 22_04-lts
       version: latest
+{{- end }}

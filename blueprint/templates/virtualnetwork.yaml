@@ -2,6 +2,7 @@ apiVersion: network.azure.com/v1api20201101
 kind: VirtualNetwork
 metadata:
   name: {{ .Values.virtualNetwork.name }}
+  namespace: {{ .Release.Namespace }}
 spec:
   location: {{ .Values.armRegionName }}
   owner:
